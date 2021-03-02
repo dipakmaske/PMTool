@@ -23,11 +23,12 @@ public class Project {
 	@NotBlank(message = "Description is required")
 	private String description;
 	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date startDate;
+	private Date start_date;
 	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date endDate;
+	private Date end_date;
 	
 	@JsonFormat(pattern = "yyyy-mm-dd")
+	@Column(updatable = false)
 	private Date createdAt;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date updatedAt;
@@ -70,20 +71,22 @@ public class Project {
 		this.description = description;
 	}
 
-	public Date getStartDate() {
-		return startDate;
+
+
+	public Date getStart_date() {
+		return start_date;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
 	}
 
-	public Date getEndDate() {
-		return endDate;
+	public Date getEnd_date() {
+		return end_date;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEnd_date(Date end_date) {
+		this.end_date = end_date;
 	}
 
 	public Date getCreatedAt() {
@@ -115,8 +118,10 @@ public class Project {
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", projectName=" + projectName + ", projectIdentifier=" + projectIdentifier
-				+ ", description=" + description + ", startDate=" + startDate + ", endDate=" + endDate + ", createdAt="
-				+ createdAt + ", updatedAt=" + updatedAt + "]";
+				+ ", description=" + description + ", start_date=" + start_date + ", end_date=" + end_date
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
+
+	
 	
 }

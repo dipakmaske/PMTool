@@ -22,6 +22,7 @@ public class ProjectService {
 	}
 	
 	public Project findProjectByIdentifier(String projectId) {
+		System.out.println("in project sevice get project"+projectId);
 		 Project project=projRepo.findByProjectIdentifier(projectId.toUpperCase());
 		 if(project==null) {
 			 throw new ProjectIdException("Project id "+projectId+" does not exist");

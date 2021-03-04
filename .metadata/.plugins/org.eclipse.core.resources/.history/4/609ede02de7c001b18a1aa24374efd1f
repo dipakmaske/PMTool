@@ -30,9 +30,9 @@ public class Project {
 	
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	@Column(updatable = false)
-	private Date created_At;
+	private Date createdAt;
 	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date updated_At;
+	private Date updatedAt;
 	
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
     @JsonIgnore
@@ -103,41 +103,38 @@ public class Project {
 		this.end_date = end_date;
 	}
 
-	public Date getCreated_At() {
-		return created_At;
+	public Date getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setCreated_At(Date created_At) {
-		this.created_At = created_At;
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 
-	public Date getUpdated_At() {
-		return updated_At;
+	public Date getUpdatedAt() {
+		return updatedAt;
 	}
 
-	public void setUpdated_At(Date updated_At) {
-		this.updated_At = updated_At;
+	public void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@PrePersist
+	protected void onUpdate() {
+		this.updatedAt=new Date();
 	}
 	
-    @PrePersist
-    protected void onCreate(){
-        this.created_At = new Date();
-    }
+	@PostPersist
+	protected void onCreate() {
+		this.createdAt=new Date();
+	}
 
-    @PreUpdate
-    protected void onUpdate(){
-        this.updated_At = new Date();
-    }
 	@Override
 	public String toString() {
 		return "Project [id=" + id + ", projectName=" + projectName + ", projectIdentifier=" + projectIdentifier
 				+ ", description=" + description + ", start_date=" + start_date + ", end_date=" + end_date
-				+ ", created_At=" + created_At + ", updated_At=" + updated_At + "]";
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-
-
-
-	
 
 	
 	

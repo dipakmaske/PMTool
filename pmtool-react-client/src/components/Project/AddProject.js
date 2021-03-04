@@ -111,10 +111,10 @@ this.setState({errors:nextProps.errors})
                     type="date"
                     className="form-control form-control-lg"
                     name="startDate"
-                    value={this.state.startDate}
+                    value={this.state.start_date}
                     onChange={this.onChange}
                   />
-                  <p>{errors.startDate}</p>
+                  <p>{errors.start_date}</p>
                 </div>
                 <h6>Estimated End Date</h6>
                 <div className="form-group">
@@ -122,10 +122,10 @@ this.setState({errors:nextProps.errors})
                     type="date"
                     className="form-control form-control-lg"
                     name="endDate"
-                    value={this.state.endDate}
+                    value={this.state.end_date}
                     onChange={this.onChange}
                   />
-                  <p>{errors.endDate}</p>
+                  <p>{errors.end_date}</p>
                 </div>
 
                 <input

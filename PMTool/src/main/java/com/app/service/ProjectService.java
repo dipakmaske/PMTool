@@ -3,8 +3,10 @@ package com.app.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.dao.BacklogRepository;
 import com.app.dao.ProjectRepo;
 import com.app.exceptions.ProjectIdException;
+import com.app.pojos.Backlog;
 import com.app.pojos.Project;
 
 @Service
@@ -12,11 +14,27 @@ public class ProjectService {
 	@Autowired
 	private ProjectRepo projRepo;
 
-	public Project saveOrUpdate(Project p) {
-		try {
-			return projRepo.save(p);
+	  @Autowired
+	    private BacklogRepository backlogRepository;
+
+	    public Project saveOrUpdateProject(Project project){
+	        try{
+	            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+
+	            if(project.getId()==null){
+	                Backlog backlog = new Backlog();
+	                project.setBacklog(backlog);
+	                backlog.setProject(project);
+	                backlog.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+	            }
+
+	            if(project.getId()!=null){
+	                project.setBacklog(backlogRepository.findByProjectIdentifier(project.getProjectIdentifier().toUpperCase()));
+	            }
+
+	            return projRepo.save(project);
 		} catch (Exception e) {
-			throw new ProjectIdException("Project id " + p.getProjectIdentifier().toUpperCase() + " already error");
+			throw new ProjectIdException("Project id " + project.getProjectIdentifier().toUpperCase() + " already error");
 		}
 
 	}

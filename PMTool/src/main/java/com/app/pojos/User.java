@@ -32,6 +32,11 @@ public class User implements UserDetails {
     private String confirmPassword;
     private Date create_At;
     private Date update_At;
+    
+	//add a role
+	@Enumerated(EnumType.STRING)
+	@Column(length = 20)
+	private Role role;
 
     //OneToMany with Project
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)

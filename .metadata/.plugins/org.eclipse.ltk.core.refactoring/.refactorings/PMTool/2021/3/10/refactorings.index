@@ -1,2 +1,6 @@
 1614737218813	Rename type 'ValidationErrorService'
 1614737287375	Rename method 'mapValidation'
+1614910282394	Move compilation unit
+1614913059727	Rename type 'UserNameAlreadyExists'
+1614913116250	Rename type 'UsernameAlredyExistsResponse'
+1614913177412	Rename type 'UsernameAlreadyExists'

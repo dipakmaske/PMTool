@@ -3,9 +3,9 @@ import React, { Component } from "react";
 class Header extends Component {
   render() {
     return (
-      <nav className="navbar navbar-expand-sm navbar-dark bg-primary mb-4">
+      <nav className="navbar navbar-expand-sm bg-primary navbar-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="Dashboard.html">
+          <a className="navbar-brand" href="#">
             Project Management Tool
           </a>
           <button

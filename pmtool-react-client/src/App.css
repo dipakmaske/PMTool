@@ -64,3 +64,29 @@ img {
 .form-control::placeholder {
   color: #bbb !important;
 }
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffcc 100%);
+}
+
+#column-1 {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px 10px #485563;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+}
+.card{
+  background: linear-gradient(to top, #ffffcc 0%, #ffffcc 100%);
+}

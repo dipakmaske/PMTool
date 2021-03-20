@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -22,8 +23,7 @@ public class ProjectTask {
     private String acceptanceCriteria;
     private String status;
     private Integer priority;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date dueDate;
+    private LocalDate dueDate;
     //ManyToOne with Backlog
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="backlog_id", updatable = false, nullable = false)
@@ -32,10 +32,8 @@ public class ProjectTask {
     
     @Column(updatable = false)
     private String projectIdentifier;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date create_At;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    private Date update_At;
+    private LocalDate create_At;
+    private LocalDate update_At;
 
     public ProjectTask() {
     }
@@ -96,13 +94,6 @@ public class ProjectTask {
         this.priority = priority;
     }
 
-    public Date getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(Date dueDate) {
-        this.dueDate = dueDate;
-    }
 
     public String getProjectIdentifier() {
         return projectIdentifier;
@@ -112,30 +103,15 @@ public class ProjectTask {
         this.projectIdentifier = projectIdentifier;
     }
 
-    public Date getCreate_At() {
-        return create_At;
-    }
-
-    public void setCreate_At(Date create_At) {
-        this.create_At = create_At;
-    }
-
-    public Date getUpdate_At() {
-        return update_At;
-    }
-
-    public void setUpdate_At(Date update_At) {
-        this.update_At = update_At;
-    }
 
     @PrePersist
     protected void onCreate(){
-        this.create_At = new Date();
+        this.create_At = LocalDate.now();
     }
 
     @PreUpdate
     protected void onUpdate(){
-        this.update_At = new Date();
+        this.update_At = LocalDate.now();
     }
     
 

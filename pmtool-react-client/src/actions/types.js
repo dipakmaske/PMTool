@@ -8,5 +8,6 @@ export const GET_BACKLOG = "GET_BACKLOG";
 export const GET_PROJECT_TASK = "GET_PROJECT_TASK";
 export const DELETE_PROJECT_TASK = "DELETE_PROJECT_TASK";
 
-
+//types for Developer
+export const GET_ALL_DEVELOPER = "GET_ALL_DEVELOPER";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";

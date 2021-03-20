@@ -11,9 +11,11 @@ class Register extends Component {
     this.state = {
       username: "",
       fullName: "",
+      organizationName: "",
       password: "",
       confirmPassword: "",
-      errors: {}
+      role: "MANAGER",
+      errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -36,10 +38,12 @@ class Register extends Component {
     const newUser = {
       username: this.state.username,
       fullName: this.state.fullName,
+      organizationName: this.state.organizationName,
       password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      confirmPassword: this.state.confirmPassword,
+      role: this.state.role,
     };
-
+    console.log(newUser);
     this.props.createNewUser(newUser, this.props.history);
   }
 
@@ -61,7 +65,7 @@ class Register extends Component {
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.fullName
+                      "is-invalid": errors.fullName,
                     })}
                     placeholder="Full Name"
                     name="fullName"
@@ -76,7 +80,7 @@ class Register extends Component {
                   <input
                     type="text"
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.username
+                      "is-invalid": errors.username,
                     })}
                     placeholder="Email Address (Username)"
                     name="username"
@@ -89,9 +93,26 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <input
+                    type="text"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.organizationName,
+                    })}
+                    placeholder="Enter Orgnization Name"
+                    name="organizationName"
+                    value={this.state.organizationName}
+                    onChange={this.onChange}
+                  />
+                  {errors.organizationName && (
+                    <div className="invalid-feedback">
+                      {errors.organizationName}
+                    </div>
+                  )}
+                </div>
+                <div className="form-group">
+                  <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.password
+                      "is-invalid": errors.password,
                     })}
                     placeholder="Password"
                     name="password"
@@ -106,7 +127,7 @@ class Register extends Component {
                   <input
                     type="password"
                     className={classnames("form-control form-control-lg", {
-                      "is-invalid": errors.confirmPassword
+                      "is-invalid": errors.confirmPassword,
                     })}
                     placeholder="Confirm Password"
                     name="confirmPassword"
@@ -118,6 +139,19 @@ class Register extends Component {
                       {errors.confirmPassword}
                     </div>
                   )}
+                </div>
+                <h5 className="text-center">Role</h5>
+                <div className="form-group">
+                  <select
+                    className="form-control form-control-lg"
+                    name="role"
+                    placeholder="Select Role"
+                    value={this.state.role}
+                    onChange={this.onChange}
+                  >
+                    <option value={"MANAGER"}>Manager</option>
+                    <option value={"DEVELOPER"}>Developer</option>
+                  </select>
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
@@ -132,14 +166,11 @@ class Register extends Component {
 Register.propTypes = {
   createNewUser: PropTypes.func.isRequired,
   errors: PropTypes.object.isRequired,
-  security: PropTypes.object.isRequired
+  security: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   errors: state.errors,
-  security: state.security
+  security: state.security,
 });
-export default connect(
-  mapStateToProps,
-  { createNewUser }
-)(Register);
+export default connect(mapStateToProps, { createNewUser })(Register);

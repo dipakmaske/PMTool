@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.BacklogRepository;
-import com.app.dao.ProjectRepo;
 import com.app.dao.ProjectTaskRepository;
 import com.app.exceptions.ProjectNotFoundException;
 import com.app.pojos.Backlog;
@@ -21,8 +20,6 @@ public class ProjectTaskService {
 	@Autowired
 	private ProjectTaskRepository projectTaskRepository;
 
-	@Autowired
-	private ProjectRepo projectRepo;
 
 	@Autowired
 	private ProjectService projectService;
@@ -106,7 +103,6 @@ public class ProjectTaskService {
 		List<ProjectTask> pts = backlog.getProjectTasks();
 		pts.remove(projectTask);
 		backlogRepository.save(backlog);
-
 		projectTaskRepository.delete(projectTask);
 	}
 }

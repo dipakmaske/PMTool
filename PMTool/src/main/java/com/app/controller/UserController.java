@@ -1,3 +1,4 @@
+
 package com.app.controller;
 
 import static com.app.security.SecurityConstants.TOKEN_PREFIX;
@@ -12,13 +13,15 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.payload.JWTLoginSucessReponse;
-import com.app.payload.LoginRequest;
+import com.app.dto.JWTLoginSucessReponse;
+import com.app.dto.LoginRequest;
 import com.app.pojos.User;
 import com.app.security.JwtTokenProvider;
 import com.app.service.MapValidationErrorService;
@@ -44,7 +47,7 @@ public class UserController {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 
-	@PostMapping("/login")
+	@PostMapping("/public/login")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult result) {
 		ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
 		if (errorMap != null)
@@ -59,7 +62,7 @@ public class UserController {
 		return ResponseEntity.ok(new JWTLoginSucessReponse(true, jwt));
 	}
 
-	@PostMapping("/register")
+	@PostMapping("/public/register")
 	public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult result) {
 		// Validate passwords match
 		userValidator.validate(user, result);
@@ -72,4 +75,11 @@ public class UserController {
 
 		return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
 	}
+
+	@GetMapping("/developers/{organizationName}")
+	public Iterable<User> getAllDevelopers(@PathVariable String organizationName ) {
+
+		return userService.getAllDeveloper(organizationName);
+	}
+
 }

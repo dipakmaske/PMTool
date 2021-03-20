@@ -1,12 +1,25 @@
 package com.app.pojos;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -15,37 +28,31 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@NotBlank(message="project name is required")
+	@NotBlank(message = "project name is required")
 	private String projectName;
 	@NotBlank(message = "project Identifier Required")
-	@Size(min = 4,max = 5,message = "please use 4 to 5 character")
-	@Column(updatable = false,unique = true)
+	@Size(min = 4, max = 5, message = "please use 4 to 5 character")
+	@Column(updatable = false, unique = true)
 	private String projectIdentifier;
 	@NotBlank(message = "Description is required")
 	private String description;
-	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date start_date;
-	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date end_date;
-	
-	@JsonFormat(pattern = "yyyy-mm-dd")
+	private LocalDate start_date;
+	private LocalDate end_date;
+
 	@Column(updatable = false)
-	private Date created_At;
-	@JsonFormat(pattern = "yyyy-mm-dd")
-	private Date updated_At;
-	
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
-    @JsonIgnore
-    private Backlog backlog;
-    
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private User user;
+	private LocalDate created_At;
+	private LocalDate updated_At;
 
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+	@JsonIgnore
+	private Backlog backlog;
 
-    private String projectLeader;
-	
-	
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinTable(name = "project_users", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private Set<User> members = new HashSet<User>();
+
+	private String projectLeader;
+
 	public Project() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,18 +62,16 @@ public class Project {
 		return id;
 	}
 
-	
 	public Backlog getBacklog() {
 		return backlog;
 	}
-	
 
-	public User getUser() {
-		return user;
+	public Set<User> getMembers() {
+		return members;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setMembers(Set<User> members) {
+		this.members = members;
 	}
 
 	public String getProjectLeader() {
@@ -109,60 +114,73 @@ public class Project {
 		this.description = description;
 	}
 
-
-
-	public Date getStart_date() {
+	public LocalDate getStart_date() {
 		return start_date;
 	}
 
-	public void setStart_date(Date start_date) {
+	public void setStart_date(LocalDate start_date) {
 		this.start_date = start_date;
 	}
 
-	public Date getEnd_date() {
+	public LocalDate getEnd_date() {
 		return end_date;
 	}
 
-	public void setEnd_date(Date end_date) {
+	public void setEnd_date(LocalDate end_date) {
 		this.end_date = end_date;
 	}
 
-	public Date getCreated_At() {
+	public LocalDate getCreated_At() {
 		return created_At;
 	}
 
-	public void setCreated_At(Date created_At) {
+	public void setCreated_At(LocalDate created_At) {
 		this.created_At = created_At;
 	}
 
-	public Date getUpdated_At() {
+
+
+	public LocalDate getUpdated_At() {
 		return updated_At;
 	}
 
-	public void setUpdated_At(Date updated_At) {
+	public void setUpdated_At(LocalDate updated_At) {
 		this.updated_At = updated_At;
 	}
-	
-    @PrePersist
-    protected void onCreate(){
-        this.created_At = new Date();
-    }
 
-    @PreUpdate
-    protected void onUpdate(){
-        this.updated_At = new Date();
-    }
-	@Override
-	public String toString() {
-		return "Project [id=" + id + ", projectName=" + projectName + ", projectIdentifier=" + projectIdentifier
-				+ ", description=" + description + ", start_date=" + start_date + ", end_date=" + end_date
-				+ ", created_At=" + created_At + ", updated_At=" + updated_At + "]";
+	@PrePersist
+	protected void onCreate() {
+		this.created_At = java.time.LocalDate.now();
 	}
 
+	@PreUpdate
+	protected void onUpdate() {
+		this.updated_At = LocalDate.now();
+	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((projectIdentifier == null) ? 0 : projectIdentifier.hashCode());
+		return result;
+	}
 
-	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Project other = (Project) obj;
+		if (projectIdentifier == null) {
+			if (other.projectIdentifier != null)
+				return false;
+		} else if (!projectIdentifier.equals(other.projectIdentifier))
+			return false;
+		return true;
+	}
 
-	
-	
 }

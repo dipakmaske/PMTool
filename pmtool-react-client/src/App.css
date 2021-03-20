@@ -40,7 +40,7 @@ img {
 }
 
 .landing-inner {
-  padding-top: 80px;
+  padding-top: 20px;
 }
 
 .dark-overlay {
@@ -69,12 +69,21 @@ html {
   height: 100%;
 }
 
+body2 {
+background-image: url("bg2.jpg");
+height: 100px; /* You must set a specified height */
+background-position: center; /* Center the image */
+background-repeat: no-repeat; /* Do not repeat the image */
+background-size: cover;
+}
+
 body {
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(to bottom, #ffffff 0%, #ffffcc 100%);
+  background: linear-gradient(to right, #ffcc00 3%, #ffccff 92%);
+  background-size: cover;
 }
 
 #column-1 {
@@ -89,4 +98,8 @@ body {
 }
 .card{
   background: linear-gradient(to top, #ffffcc 0%, #ffffcc 100%);
+}
+
+.Carousel.Item{
+  height: 300px;
 }

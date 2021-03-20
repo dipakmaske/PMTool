@@ -59,11 +59,11 @@ class AddProjectTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${id}`} className="btn btn-light">
-                Back to Project Board
+              <Link to={`/projectBoard/${id}`} className="btn btn-link">
+                 Back to Project Board
               </Link>
               <h4 className="display-4 text-center">Add Project Task</h4>
-              <p className="lead text-center">Project Name + Project Code</p>
+              <p></p>
               <form onSubmit={this.onSubmit}>
                 <div className="form-group">
                   <input
@@ -89,7 +89,7 @@ class AddProjectTask extends Component {
                     onChange={this.onChange}
                   />
                 </div>
-                <h6>Due Date</h6>
+                <h6>Select Due Date</h6>
                 <div className="form-group">
                   <input
                     type="date"

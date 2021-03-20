@@ -28,4 +28,11 @@ public class CustResponseEntityException extends ResponseEntityExceptionHandler{
 	        UsernameAlreadyExistsResponse exceptionResponse = new UsernameAlreadyExistsResponse(ex.getMessage());
 	        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
 	    }
+	   
+	   @ExceptionHandler
+	    public final ResponseEntity<Object> handleNotAuthorisedUser(NotAuthorisedException ex, WebRequest request){
+		   NotAuthorisedExResponse exceptionResponse = new NotAuthorisedExResponse(ex.getMessage());
+	        return new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
+	    }
+	   
 }

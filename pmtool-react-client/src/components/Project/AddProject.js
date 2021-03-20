@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createProject } from "../../actions/projectActions";
 import classnames from "classnames";
+import { getAllDeveloper } from "../../actions/userActions";
+import { Multiselect } from "multiselect-react-dropdown";
 
 class AddProject extends Component {
   constructor() {
@@ -14,14 +16,30 @@ class AddProject extends Component {
       description: "",
       start_date: "",
       end_date: "",
-      errors: {}
+      members: [],
+      errors: {},
+    };
+
+    this.style = {
+      searchBox: {
+        border: "none",
+        "border-radius": "5px",
+        "font-size": "20px",
+        background: "white",
+        "min-height": "50px",
+      },
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onSelect = this.onSelect.bind(this);
   }
 
-  //life cycle hooks
+  componentDidMount() {
+    const {org_name}=this.props.match.params
+    this.props.getAllDeveloper(org_name);
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
@@ -32,6 +50,11 @@ class AddProject extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onSelect(SelectedList, SelectedItem) {
+    this.setState({ members: SelectedItem });
+    this.setState({ members: SelectedList });
+  }
+
   onSubmit(e) {
     e.preventDefault();
     const newProject = {
@@ -39,13 +62,15 @@ class AddProject extends Component {
       projectIdentifier: this.state.projectIdentifier,
       description: this.state.description,
       start_date: this.state.start_date,
-      end_date: this.state.end_date
+      end_date: this.state.end_date,
+      members: this.state.members,
     };
     this.props.createProject(newProject, this.props.history);
   }
 
   render() {
     const { errors } = this.state;
+    const { developers } = this.props.developers;
 
     return (
       <div>
@@ -60,7 +85,7 @@ class AddProject extends Component {
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.projectName
+                        "is-invalid": errors.projectName,
                       })}
                       placeholder="Project Name"
                       name="projectName"
@@ -77,7 +102,7 @@ class AddProject extends Component {
                     <input
                       type="text"
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.projectIdentifier
+                        "is-invalid": errors.projectIdentifier,
                       })}
                       placeholder="Unique Project ID"
                       name="projectIdentifier"
@@ -93,7 +118,7 @@ class AddProject extends Component {
                   <div className="form-group">
                     <textarea
                       className={classnames("form-control form-control-lg", {
-                        "is-invalid": errors.description
+                        "is-invalid": errors.description,
                       })}
                       placeholder="Project Description"
                       name="description"
@@ -106,6 +131,18 @@ class AddProject extends Component {
                       </div>
                     )}
                   </div>
+                  <div>
+                    <Multiselect
+                      options={developers}
+                      selectedValues={this.state.members}
+                      placeholder="choose members"
+                      onSelect={this.onSelect}
+                      onChange={this.onChange}
+                      displayValue="fullName"
+                      style={this.style}
+                    />
+                  </div>
+                  <p></p>
                   <h6>Start Date</h6>
                   <div className="form-group">
                     <input
@@ -143,14 +180,15 @@ class AddProject extends Component {
 
 AddProject.propTypes = {
   createProject: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
+  getAllDeveloper: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  errors: state.errors
+const mapStateToProps = (state) => ({
+  errors: state.errors,
+  developers: state.developers,
 });
 
-export default connect(
-  mapStateToProps,
-  { createProject }
-)(AddProject);
+export default connect(mapStateToProps, { createProject, getAllDeveloper })(
+  AddProject
+);

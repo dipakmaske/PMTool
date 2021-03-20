@@ -57,10 +57,10 @@ class App extends Component {
             }
             <Switch>
               <SecuredRoute exact path="/dashboard" component={Dashboard} />
-              <SecuredRoute exact path="/addProject" component={AddProject} />
+              <SecuredRoute exact path="/addProject/:org_name" component={AddProject} />
               <SecuredRoute
                 exact
-                path="/updateProject/:id"
+                path="/updateProject/:id/:org_name"
                 component={UpdateProject}
               />
               <SecuredRoute

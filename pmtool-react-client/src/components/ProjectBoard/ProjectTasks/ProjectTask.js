@@ -10,6 +10,7 @@ class ProjectTask extends Component {
   }
   render() {
     const { project_task } = this.props;
+    const { user } = this.props.security;
     let priorityString;
     let priorityClass;
 
@@ -46,6 +47,7 @@ class ProjectTask extends Component {
         >
             View / Update
           </Link>
+          {user.role == "MANAGER" ? (
 
           <button
           className="btn btn-danger ml-4"
@@ -56,16 +58,28 @@ class ProjectTask extends Component {
           )}
         >
           Delete
-        </button>
+        </button>):(<button
+          className="btn btn-danger ml-4"
+          onClick={notAllowedDelete}
+        >
+          Delete
+        </button>)}
         </div>
       </div>
     );
   }
 }
+function notAllowedDelete() {
+  alert("You are not Authorized to delete a Project Task!");
+}
+const mapStateToProps = (state) => ({
+  security: state.security,
+});
 ProjectTask.propTypes = {
-  deleteProjectTask: PropTypes.func.isRequired
+  deleteProjectTask: PropTypes.func.isRequired,
+  security: PropTypes.object.isRequired
 };
 export default connect(
-  null,
+  mapStateToProps,
   { deleteProjectTask }
 )(ProjectTask);

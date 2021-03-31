@@ -19,6 +19,7 @@ import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
+import ContactUs from "./components/ContactUs"
 
 const jwtToken = localStorage.jwtToken;
 
@@ -77,6 +78,8 @@ class App extends Component {
                 exact
                 path="/updateProjectTask/:backlog_id/:pt_id"
                 component={UpdateProjectTask}
+                />
+              <SecuredRoute exact path="/contactus" component={ContactUs}
               />
             </Switch>
           </div>

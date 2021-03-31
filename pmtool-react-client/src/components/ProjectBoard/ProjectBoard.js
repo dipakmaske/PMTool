@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getBacklog } from "../../actions/backlogActions";
 
+
 class ProjectBoard extends Component {
   //constructor to handle errors
   constructor() {
@@ -55,7 +56,10 @@ class ProjectBoard extends Component {
           );
         }
       } else {
-        return <Backlog project_tasks_prop={project_tasks} />;
+        return <div><Backlog project_tasks_prop={project_tasks} />
+        </div>
+        
+        
       }
     };
 
@@ -63,12 +67,13 @@ class ProjectBoard extends Component {
 
     return (
       <div className="container">
-      <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
+      <Link to={`/addProjectTask/${id}`} className="btn btn-info mb-3"> 
       <i className="fas fa-plus-circle"> Create Project Task</i>
     </Link> 
         <br />
         <hr />
         {BoardContent}
+
       </div>
     );
   }

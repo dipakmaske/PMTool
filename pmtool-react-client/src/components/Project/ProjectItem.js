@@ -24,11 +24,10 @@ class ProjectItem extends Component {
             </div>
             <div className="col-lg-6 col-md-4 col-8">
               <h2>{project.projectName}</h2>
-              <p>Description: {project.description}</p>
-              <p></p>
-              <p></p>
-              <p>Created :{project.created_At}</p>
-              <p>Estimated End Date:{project.end_date}</p>
+              <p >Description: {project.description}</p>
+              <div className="card-spacing-large">
+              <h8 style={{ fontFamily:"emoji",opacity: "0.8"}}>Created on : {project.created_At}</h8>
+            </div>
             </div>
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group ">
@@ -74,16 +73,16 @@ class ProjectItem extends Component {
               </ul>
             </div>
           </div>
+          </div>
         </div>
-      </div>
     );
   }
 }
 function notAllowedDelete() {
-  alert("You are not allowed to delete a project!");
+  alert("You are not authorized to delete a project!");
 }
 function notAllowedUpdate() {
-  alert("You are not allowed to update a project!");
+  alert("You are not authorized to update a project!");
 }
 
 ProjectItem.propTypes = {

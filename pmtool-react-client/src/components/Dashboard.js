@@ -4,6 +4,7 @@ import CreateProjectButton from "./Project/CreateProjectButton";
 import { connect } from "react-redux";
 import { getProjects } from "../actions/projectActions";
 import PropTypes from "prop-types";
+
 class Dashboard extends Component {
   componentDidMount() {
     this.props.getProjects();
@@ -18,7 +19,7 @@ class Dashboard extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <h1 className="display-4 text-center">Projects</h1>
+              <h1 className="display-3 text-center" style={{ fontFamily: "serif" }}>Projects</h1>
               <br />
               {user.role == "MANAGER" ? (
                 <CreateProjectButton />
@@ -30,6 +31,7 @@ class Dashboard extends Component {
 
               <br />
               <hr />
+              
               {projects.map((project) => (
                 <ProjectItem key={project.id} project={project} />
               ))}

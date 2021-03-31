@@ -4,7 +4,7 @@ img {
 }
 
 .navbar {
-  background-color:aliceblue;
+  background-color:rgb(57, 62, 66);
 }
 .fa.fa-edit {
   color: #18a2b9;
@@ -41,6 +41,37 @@ img {
 
 .landing-inner {
   padding-top: 20px;
+}
+
+.btn:hover{
+transform:scale(1.02)
+}
+
+.btn{  
+  
+  position: relative;
+  overflow: hidden;
+  height: auto;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+  transition: .5s;
+
+}
+
+.list-group-item:hover{
+  transform:scale(1.02)
+}
+.card{
+  position: relative;
+  min-width: 300px;
+  height: auto;
+  overflow: hidden;
+  box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+  transition: .5s;
+}
+
+
+.card:hover {
+  transform:scale(1.03);
 }
 
 .dark-overlay {
@@ -82,7 +113,7 @@ body {
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background: linear-gradient(to right, #ffcc00 3%, #ffccff 92%);
+  background: linear-gradient(to right, #fdfcfb 3%, #e2d1c3 92%);
   background-size: cover;
 }
 
@@ -98,8 +129,18 @@ body {
 }
 .card{
   background: linear-gradient(to top, #ffffcc 0%, #ffffcc 100%);
+  
 }
+.card-spacing-contact{
+  margin-top: 25px;
 
+}
+.card-spacing{
+  margin-bottom: 10px;
+}
+.card-spacing-large{
+  margin-top: 50px;
+}
 .Carousel.Item{
   height: 300px;
 }

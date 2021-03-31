@@ -14,7 +14,7 @@ import image9 from "./Images/9.jpg";
 const CarouselContainer = () => {
   return (
     <Carousel pause={false}>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image1}
@@ -22,7 +22,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={4000}>
         <img
           className="d-block w-80"
           src={image2}
@@ -30,7 +30,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image4}
@@ -38,7 +38,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image5}
@@ -46,7 +46,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image6}
@@ -54,7 +54,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image7}
@@ -62,7 +62,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image8}
@@ -70,7 +70,7 @@ const CarouselContainer = () => {
           style={{ height: "70vh" }}
         />
       </Carousel.Item>
-      <Carousel.Item interval={5000}>
+      <Carousel.Item interval={3000}>
         <img
           className="d-block w-80"
           src={image9}

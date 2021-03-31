@@ -13,7 +13,7 @@ class AddProjectTask extends Component {
     this.state = {
       summary: "",
       acceptanceCriteria: "",
-      status: "",
+      status: "TO_DO",
       priority: 0,
       dueDate: "",
       projectIdentifier: id,
@@ -59,9 +59,11 @@ class AddProjectTask extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <Link to={`/projectBoard/${id}`} className="btn btn-link">
-                 Back to Project Board
+            
+              <Link to={`/projectBoard/${id}`}  className="btn btn-light" >
+              <i className="fa fa-chevron-left" > Back to Project Board </i>
               </Link>
+              
               <h4 className="display-4 text-center">Add Project Task</h4>
               <p></p>
               <form onSubmit={this.onSubmit}>
@@ -93,11 +95,16 @@ class AddProjectTask extends Component {
                 <div className="form-group">
                   <input
                     type="date"
-                    className="form-control form-control-lg"
+                    className={classnames("form-control form-control-lg", {
+                      "is-invalid": errors.dueDate
+                    })}
                     name="dueDate"
                     value={this.state.dueDate}
                     onChange={this.onChange}
                   />
+                  {errors.dueDate && (
+                    <div className="invalid-feedback">{errors.dueDate}</div>
+                  )}
                 </div>
                 <div className="form-group">
                   <select
@@ -110,20 +117,6 @@ class AddProjectTask extends Component {
                     <option value={1}>High</option>
                     <option value={2}>Medium</option>
                     <option value={3}>Low</option>
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <select
-                    className="form-control form-control-lg"
-                    name="status"
-                    value={this.state.status}
-                    onChange={this.onChange}
-                  >
-                    <option value="">Select Status</option>
-                    <option value="TO_DO">TO DO</option>
-                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                    <option value="DONE">DONE</option>
                   </select>
                 </div>
 

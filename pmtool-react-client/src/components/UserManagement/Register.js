@@ -16,7 +16,7 @@ class Register extends Component {
       confirmPassword: "",
       role: "MANAGER",
       errors: {},
-    };
+    };    
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
@@ -32,7 +32,6 @@ class Register extends Component {
       this.setState({ errors: nextProps.errors });
     }
   }
-
   onSubmit(e) {
     e.preventDefault();
     const newUser = {
@@ -43,7 +42,6 @@ class Register extends Component {
       confirmPassword: this.state.confirmPassword,
       role: this.state.role,
     };
-    console.log(newUser);
     this.props.createNewUser(newUser, this.props.history);
   }
 
@@ -70,6 +68,7 @@ class Register extends Component {
                     placeholder="Full Name"
                     name="fullName"
                     value={this.state.fullName}
+                    onClick={this.onClick}
                     onChange={this.onChange}
                   />
                   {errors.fullName && (
@@ -140,7 +139,7 @@ class Register extends Component {
                     </div>
                   )}
                 </div>
-                <h5 className="text-center">Role</h5>
+                <h5 className="text-center">Select Role</h5>
                 <div className="form-group">
                   <select
                     className="form-control form-control-lg"
@@ -153,7 +152,7 @@ class Register extends Component {
                     <option value={"DEVELOPER"}>Developer</option>
                   </select>
                 </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
+                <input type="submit" className="btn btn-info btn-block mt-4 " />
               </form>
             </div>
           </div>

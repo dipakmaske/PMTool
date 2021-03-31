@@ -17,7 +17,13 @@ class Header extends Component {
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
             <Link className="nav-link" to="/dashboard">
-              Dashboard
+              <i className="fa fa-home"> Dashboard </i>{" "}
+            </Link>
+          </li>
+
+          <li className="nav-item">
+            <Link className="nav-link" to="/contactus">
+              <i class="fa fa-envelope"> Contact us</i>{" "}
             </Link>
           </li>
         </ul>
@@ -71,7 +77,9 @@ class Header extends Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <h4 style={{color:'yellow',fontFamily:'cursive'}}>Project Management Tool</h4>
+            <h4 style={{ color: "yellow", fontFamily: "cursive" }}>
+              Project Management Tool
+            </h4>
           </Link>
           <button
             className="navbar-toggler"
@@ -90,14 +98,11 @@ class Header extends Component {
 
 Header.propTypes = {
   logout: PropTypes.func.isRequired,
-  security: PropTypes.object.isRequired
+  security: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  security: state.security
+const mapStateToProps = (state) => ({
+  security: state.security,
 });
 
-export default connect(
-  mapStateToProps,
-  { logout }
-)(Header);
+export default connect(mapStateToProps, { logout })(Header);

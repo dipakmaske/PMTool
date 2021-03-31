@@ -30,8 +30,10 @@ class ProjectTask extends Component {
     }
 
     return (
+      <div className="card-spacing">
       <div className="card mb-1 bg-light">
         <div className={`card-header text-primary ${priorityClass}`}>
+        
           ID: {project_task.projectSequence} -- Priority: {priorityString}
         </div>
         <div className="card-body bg-light">
@@ -65,6 +67,9 @@ class ProjectTask extends Component {
           Delete
         </button>)}
         </div>
+        
+        <h7 style={{ fontFamily: "monospace"  ,opacity: "0.7"}}>Updated At:{project_task.update_At} by:{project_task.updatedBy}</h7>
+      </div>
       </div>
     );
   }

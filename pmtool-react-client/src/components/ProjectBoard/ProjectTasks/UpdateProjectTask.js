@@ -100,9 +100,9 @@ class UpdateProjectTask extends Component {
             <div className="col-md-8 m-auto">
               <Link
                 to={`/projectBoard/${this.state.projectIdentifier}`}
-                className="btn btn-light"
+                className="btn btn-light" 
               >
-                Back to Project Board
+              <i className="fa fa-chevron-left" > Back to Project Board</i>
               </Link>
               <h4 className="display-4 text-center">Update Project Task</h4>
               <p className="lead text-center">
